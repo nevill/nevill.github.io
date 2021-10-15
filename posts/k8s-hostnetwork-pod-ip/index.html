@@ -1,16 +1,15 @@
 <!doctype html><html lang=en-us>
 <head>
-<meta name=generator content="Hugo 0.88.1">
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=theme-color content="dark">
-<title>兵器谱 BingQiPu | 兵器谱 BingQiPu</title>
+<title>Kubernetes POD IP | 兵器谱 BingQiPu</title>
 <meta property="og:site_name" content>
-<meta property="og:title" content="兵器谱 BingQiPu | 兵器谱 BingQiPu">
-<meta itemprop=name content="兵器谱 BingQiPu | 兵器谱 BingQiPu">
-<meta name=twitter:title content="兵器谱 BingQiPu | 兵器谱 BingQiPu">
-<meta name=application-name content="兵器谱 BingQiPu | 兵器谱 BingQiPu">
+<meta property="og:title" content="Kubernetes POD IP | 兵器谱 BingQiPu">
+<meta itemprop=name content="Kubernetes POD IP | 兵器谱 BingQiPu">
+<meta name=twitter:title content="Kubernetes POD IP | 兵器谱 BingQiPu">
+<meta name=application-name content="Kubernetes POD IP | 兵器谱 BingQiPu">
 <meta name=description content>
 <meta name=twitter:description content>
 <meta itemprop=description content>
@@ -38,33 +37,62 @@
 </nav>
 <main>
 <div class=container>
-<section class=my>
-<div class=content>
-<div class=bio-social>
-<a href=github.com/nevill target=_blank rel=noreferrer title=github aria-label=github><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewBox="0 0 24 24"><g id="surface3680"><path fill="currentcolor" d="M10.898438 2.101562c-4.597657.5-8.296876 4.199219-8.796876 8.699219-.5 4.699219 2.199219 8.898438 6.296876 10.5C8.699219 21.398438 9 21.199219 9 20.800781V19.199219S8.601562 19.300781 8.101562 19.300781c-1.402343.0-2-1.199219-2.101562-1.902343C5.898438 17 5.699219 16.699219 5.398438 16.398438 5.101562 16.300781 5 16.300781 5 16.199219 5 16 5.300781 16 5.398438 16 6 16 6.5 16.699219 6.699219 17c.5.800781000000001 1.101562 1 1.402343 1C8.5 18 8.800781 17.898438 9 17.800781 9.101562 17.101562 9.398438 16.398438 10 16c-2.300781-.5-4-1.800781-4-4 0-1.101562.5-2.199219 1.199219-3C7.101562 8.800781 7 8.300781 7 7.601562c0-.402343.0-1 .300781-1.601562.0.0 1.398438.0 2.800781 1.300781C10.601562 7.101562 11.300781 7 12 7s1.398438.101562 2 .300781C15.300781 6 16.800781 6 16.800781 6 17 6.601562 17 7.199219 17 7.601562 17 8.398438 16.898438 8.800781 16.800781 9 17.5 9.800781 18 10.800781 18 12c0 2.199219-1.699219 3.5-4 4 .601562.5 1 1.398438 1 2.300781v2.597657C15 21.199219 15.300781 21.5 15.699219 21.398438 19.398438 19.898438 22 16.300781 22 12.101562c0-6-5.101562-10.703124-11.101562-10zm0 0"/></g></svg>
+<article>
+<header class=article-header>
+<div class=thumb>
+<div>
+<h1>Kubernetes POD IP</h1>
+<div class=post-meta>
+<div>
+By Nevill | <time>October 15, 2021</time>
+| 1 minutes
+</div>
+<div class=tags>
+</div>
+</div>
+</div>
+</div>
+</header>
+</article>
+<div class=article-post>
+<p>最近在本地尝试<a href=https://github.com/nevill/learn-k8s>Kubernetes 集群的搭建</a>。</p>
+<p>一个主机有两张网卡，在安装完集群以后，发现 Pod 里分配的 IP 全部都是主机第一张网卡的 IP。
+而这个环境是 Vagrant + Virtualbox 安装，第一张网卡的 IP 地址也都是固定的。</p>
+<p><img loading=lazy src=/posts/k8s-hostnetwork-pod-ip/images/pod-with-same-ip-addr.png alt="Pods with same IP" width=2172 height=596></p>
+<p>开始找解决方案。</p>
+<ol>
+<li>
+<p>想到 Pod 的网络是通过 cni 来分配的，也许可以通过改 cni 配置来实现。翻看了半天 cni 的资料，尝试了一下没有成功，以后要加强 cni 的学习。</p>
+</li>
+<li>
+<p>回头看这个图的时候，忽然发现有些 Pod 是能成功分配 IP 的，而那些分配到了相同 IP 的 Pod 在 Spec 定义里都有一个 <code>hostNetwork: true</code>。 确实，<code>10.0.2.15</code> 这个 IP 就是主机第一张网卡上的。翻看 k8s 源代码，发现有 hostNetwork 属性的 Pod 在确定其 IP 时，就是读取所在 node 上的 IP 地址 [1]。</p>
+</li>
+<li>
+<p>Node 节点的信息都由 Kubelet 控制，因此，怎么取 node IP 的过程跟 cni 没关系，而是直接从 Spec 中读取。
+而 Spec 中 status.address 是从主机上按照网卡顺序取 IP，或者，通过 &ndash;node-ip 这个参数指定。</p>
+</li>
+<li>
+<p>所以最终的解决方法就是在 kubelet 启动的参数中指定 node-ip 这个参数即可。</p>
+</li>
+<li>
+<p>这么做也有问题，比如这个 IP 地址是动态分配的怎么办？看到有 Issue 讨论 AWS 可以通过 API 解析域名的方式来获取 IP，这些功能是跟厂商绑定的了。</p>
+</li>
+</ol>
+<h2 id=参考>
+<a href=#%e5%8f%82%e8%80%83 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
 </a>
+参考
+</h2>
+<p>[1] pkg/kubelet/kubelet_pods.go : <code>func (kl *Kubelet) generateAPIPodStatus(pod *v1.Pod, podStatus *kubecontainer.PodStatus) v1.PodStatus</code></p>
 </div>
-</div>
-</section>
 </div>
 <div class=container>
-<section>
-<h2>
-Latest Articles
-<a class=section-button href=/articles/>View all</a>
-</h2>
-<div class=posts>
-<div class=post>
-<a href=/posts/k8s-hostnetwork-pod-ip/>
-<div class=post-row>
-<time>Oct 15</time>
-<h3>Kubernetes POD IP</h3>
+<nav class="flex container suggested">
+</nav>
 </div>
-</a>
+<div class=container>
 </div>
-</div>
-</section>
-</div>
+</main>
 </main>
 <footer class="footer flex">
 <section class=container>

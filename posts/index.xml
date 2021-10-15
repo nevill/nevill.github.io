@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 兵器谱 BingQiPu</title><link>https://nevill.github.io/posts/</link><description>Recent content in Posts on 兵器谱 BingQiPu</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 15 Oct 2021 12:48:08 +0800</lastBuildDate><atom:link href="https://nevill.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Kubernetes POD IP</title><link>https://nevill.github.io/posts/k8s-hostnetwork-pod-ip/</link><pubDate>Fri, 15 Oct 2021 12:48:08 +0800</pubDate><guid>https://nevill.github.io/posts/k8s-hostnetwork-pod-ip/</guid><description>最近在本地尝试Kubernetes 集群的搭建。
+一个主机有两张网卡，在安装完集群以后，发现 Pod 里分配的 IP 全部都是主机第一张网卡的 IP。 而这个环境是 Vagrant + Virtualbox 安装，第一张网卡的 IP 地址也都是固定的。
+开始找解决方案。
+想到 Pod 的网络是通过 cni 来分配的，也许可以通过改 cni 配置来实现。翻看了半天 cni 的资料，尝试了一下没有成功，以后要加强 cni 的学习。
+回头看这个图的时候，忽然发现有些 Pod 是能成功分配 IP 的，而那些分配到了相同 IP 的 Pod 在 Spec 定义里都有一个 hostNetwork: true。 确实，10.0.2.15 这个 IP 就是主机第一张网卡上的。翻看 k8s 源代码，发现有 hostNetwork 属性的 Pod 在确定其 IP 时，就是读取所在 node 上的 IP 地址 [1]。
+Node 节点的信息都由 Kubelet 控制，因此，怎么取 node IP 的过程跟 cni 没关系，而是直接从 Spec 中读取。 而 Spec 中 status.</description></item></channel></rss>

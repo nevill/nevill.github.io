@@ -1,1 +1,39 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>兵器谱 BingQiPu</title><link>https://nevill.github.io/</link><description>Recent content on 兵器谱 BingQiPu</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://nevill.github.io/index.xml" rel="self" type="application/rss+xml"/></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>兵器谱 BingQiPu</title><link>https://nevill.github.io/</link><description>Recent content on 兵器谱 BingQiPu</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 15 Oct 2021 12:48:08 +0800</lastBuildDate><atom:link href="https://nevill.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Kubernetes POD IP</title><link>https://nevill.github.io/posts/k8s-hostnetwork-pod-ip/</link><pubDate>Fri, 15 Oct 2021 12:48:08 +0800</pubDate><guid>https://nevill.github.io/posts/k8s-hostnetwork-pod-ip/</guid><description>
+&lt;p>最近在本地尝试&lt;a href="https://github.com/nevill/learn-k8s">Kubernetes 集群的搭建&lt;/a>。&lt;/p>
+&lt;p>一个主机有两张网卡，在安装完集群以后，发现 Pod 里分配的 IP 全部都是主机第一张网卡的 IP。
+而这个环境是 Vagrant + Virtualbox 安装，第一张网卡的 IP 地址也都是固定的。&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://nevill.github.io/posts/k8s-hostnetwork-pod-ip/images/pod-with-same-ip-addr.png"
+alt="Pods with same IP"
+width=2172
+height="596" />&lt;/p>
+&lt;p>开始找解决方案。&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>想到 Pod 的网络是通过 cni 来分配的，也许可以通过改 cni 配置来实现。翻看了半天 cni 的资料，尝试了一下没有成功，以后要加强 cni 的学习。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>回头看这个图的时候，忽然发现有些 Pod 是能成功分配 IP 的，而那些分配到了相同 IP 的 Pod 在 Spec 定义里都有一个 &lt;code>hostNetwork: true&lt;/code>。 确实，&lt;code>10.0.2.15&lt;/code> 这个 IP 就是主机第一张网卡上的。翻看 k8s 源代码，发现有 hostNetwork 属性的 Pod 在确定其 IP 时，就是读取所在 node 上的 IP 地址 [1]。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Node 节点的信息都由 Kubelet 控制，因此，怎么取 node IP 的过程跟 cni 没关系，而是直接从 Spec 中读取。
+而 Spec 中 status.address 是从主机上按照网卡顺序取 IP，或者，通过 &amp;ndash;node-ip 这个参数指定。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>所以最终的解决方法就是在 kubelet 启动的参数中指定 node-ip 这个参数即可。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>这么做也有问题，比如这个 IP 地址是动态分配的怎么办？看到有 Issue 讨论 AWS 可以通过 API 解析域名的方式来获取 IP，这些功能是跟厂商绑定的了。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="参考">
+&lt;a href="#%e5%8f%82%e8%80%83" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+参考
+&lt;/h2>
+&lt;p>[1] pkg/kubelet/kubelet_pods.go : &lt;code>func (kl *Kubelet) generateAPIPodStatus(pod *v1.Pod, podStatus *kubecontainer.PodStatus) v1.PodStatus&lt;/code>&lt;/p></description></item></channel></rss>
