@@ -1,0 +1,47 @@
+baseURL = "https://nevill.github.io/"
+languageCode = "en-us"
+title = "兵器谱 BingQiPu"
+theme = "tania"
+paginate = 20
+
+[params]
+  # Emoji will show before the blog title on site navbar.
+  # titleEmoji  = "😎"
+
+  # Logo will show before the blog title on site navbar.
+  # titleLogo = ""
+
+  # Enable float footnotes.
+  # Default to true
+  enableFootnotes = true
+
+  # siteName = "Hugo Tania is Amazing"
+  # siteDesc = "Hugo is Absurdly Fast!"
+  author = "Nevill"
+
+  # Limit how many categories filter show above search input.
+  # Default to 5
+  maxCategoryToShow = 10
+
+	# Show your social information with icon on index bio with `_index.md` content.
+	[params.socialOptions]
+	github = "github.com/nevill"
+
+[menu]
+[[menu.header]]
+  name = "Articles"
+  url = "/articles/"
+[[menu.footer]]
+    name = "RSS"
+    url = "/index.xml"
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    lineNos = true
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
