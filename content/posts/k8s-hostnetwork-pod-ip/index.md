@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes POD IP"
 date: 2021-10-15T12:48:08+08:00
-draft: true
+draft: false
 ---
 
 最近在本地尝试[Kubernetes 集群的搭建](https://github.com/nevill/learn-k8s)。
