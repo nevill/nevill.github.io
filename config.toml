@@ -25,7 +25,8 @@ paginate = 20
 
 	# Show your social information with icon on index bio with `_index.md` content.
 	[params.socialOptions]
-	github = "github.com/nevill"
+	github = "https://github.com/nevill"
+
 
 [menu]
 [[menu.header]]
