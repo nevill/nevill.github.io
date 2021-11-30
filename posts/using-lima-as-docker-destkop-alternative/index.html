@@ -1,0 +1,230 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=theme-color content="dark">
+<title>Using Lima as Docker Destkop Alternative | 兵器谱 BingQiPu</title>
+<meta property="og:site_name" content>
+<meta property="og:title" content="Using Lima as Docker Destkop Alternative | 兵器谱 BingQiPu">
+<meta itemprop=name content="Using Lima as Docker Destkop Alternative | 兵器谱 BingQiPu">
+<meta name=twitter:title content="Using Lima as Docker Destkop Alternative | 兵器谱 BingQiPu">
+<meta name=application-name content="Using Lima as Docker Destkop Alternative | 兵器谱 BingQiPu">
+<meta name=description content>
+<meta name=twitter:description content>
+<meta itemprop=description content>
+<meta property="og:description" content>
+<link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=stylesheet href=/sass/main.min.ab99ff095f832511e24ffb2fba2b51ad473b2f7e9301d674eba2c6c3a6e8bd81.css>
+</head>
+<script>(function(){const b='ThemeColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.userColorScheme='dark':document.documentElement.dataset.userColorScheme='light'})()</script>
+<body class=dark>
+<nav class=navbar>
+<div class=container>
+<div class=flex>
+<div>
+<a class=brand href=/>
+兵器谱 BingQiPu
+</a>
+</div>
+<div class=flex>
+<a href=/articles/>Articles</a>
+<button id=dark-mode-button><svg class="light" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)" viewBox="0 0 36 36"><path fill="#ffd983" d="M30.312.776C32 19 20 32 .776 30.312c8.199 7.717 21.091 7.588 29.107-.429C37.9 21.867 38.03 8.975 30.312.776z"/><path d="M30.705 15.915a1.163 1.163.0 101.643 1.641 1.163 1.163.0 00-1.643-1.641zm-16.022 14.38a1.74 1.74.0 000 2.465 1.742 1.742.0 100-2.465zm13.968-2.147a2.904 2.904.0 01-4.108.0 2.902 2.902.0 010-4.107 2.902 2.902.0 014.108.0 2.902 2.902.0 010 4.107z" fill="#ffcc4d"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)"/></svg><svg class="dark" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)" viewBox="0 0 36 36"><path fill="#ffd983" d="M16 2s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2V2zm18 14s2 0 2 2-2 2-2 2h-2s-2 0-2-2 2-2 2-2h2zM4 16s2 0 2 2-2 2-2 2H2s-2 0-2-2 2-2 2-2h2zm5.121-8.707s1.414 1.414.0 2.828-2.828.0-2.828.0L4.878 8.708s-1.414-1.414.0-2.829c1.415-1.414 2.829.0 2.829.0l1.414 1.414zm21 21s1.414 1.414.0 2.828-2.828.0-2.828.0l-1.414-1.414s-1.414-1.414.0-2.828 2.828.0 2.828.0l1.414 1.414zm-.413-18.172s-1.414 1.414-2.828.0.0-2.828.0-2.828l1.414-1.414s1.414-1.414 2.828.0.0 2.828.0 2.828l-1.414 1.414zm-21 21s-1.414 1.414-2.828.0.0-2.828.0-2.828l1.414-1.414s1.414-1.414 2.828.0.0 2.828.0 2.828l-1.414 1.414zM16 32s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2v-2z"/><circle fill="#ffd983" cx="18" cy="18" r="10"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)"/></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<main>
+<div class=container>
+<article>
+<header class=article-header>
+<div class=thumb>
+<div>
+<h1>Using Lima as Docker Destkop Alternative</h1>
+<div class=post-meta>
+<div>
+By Nevill | <time>November 29, 2021</time>
+| 2 minutes
+</div>
+<div class=tags>
+</div>
+</div>
+</div>
+</div>
+</header>
+</article>
+<div class=article-post>
+<p>随着 Docker Desktop 越来越笨重，我现在已经用 Lima 完全来替换掉它。</p>
+<h2 id=介绍>
+<a href=#%e4%bb%8b%e7%bb%8d class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
+</a>
+介绍
+</h2>
+<p><a href=https://github.com/lima-vm/lima>Lima</a> 是一个在 macOS 上运行虚拟化 Linux 系统的工具。
+官方称可以把 Lima 理解为 &ldquo;macOS subsystem for Linux&rdquo; 或者 &ldquo;containerd for Mac&rdquo;。</p>
+<h2 id=安装>
+<a href=#%e5%ae%89%e8%a3%85 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
+</a>
+安装
+</h2>
+<ol>
+<li>在 macOS 主机上最简单的方式是通过 Homebrew 安装</li>
+</ol>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>brew install lima
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>我比较喜欢自己构建，会自己手动构建 qemu 以后放在 $HOME/.local 下</p>
+</blockquote>
+<ol start=2>
+<li>启动虚拟机</li>
+</ol>
+<p>创建一个 <code>default.yaml</code>，内容如下（根据自己主机的情况调整 memory 和 disk 大小）</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>cpus</span><span class=p>:</span><span class=w> </span><span class=m>2</span><span class=w>
+</span><span class=w></span><span class=nt>memory</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;10GiB&#34;</span><span class=w>
+</span><span class=w></span><span class=nt>disk</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;100GiB&#34;</span><span class=w>
+</span><span class=w></span><span class=nt>images</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span>- <span class=nt>location</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;https://cloud-images.ubuntu.com/impish/current/impish-server-cloudimg-amd64.img&#34;</span><span class=w>
+</span><span class=w>    </span><span class=nt>arch</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;x86_64&#34;</span><span class=w>
+</span><span class=w></span><span class=nt>mounts</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span>- <span class=nt>location</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;~&#34;</span><span class=w>
+</span><span class=w>    </span><span class=nt>writable</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w>  </span>- <span class=nt>location</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;/tmp/lima&#34;</span><span class=w>
+</span><span class=w>    </span><span class=nt>writable</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w></span><span class=nt>ssh</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>localPort</span><span class=p>:</span><span class=w> </span><span class=m>60006</span><span class=w>
+</span><span class=w></span><span class=nt>containerd</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>system</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w>  </span><span class=nt>user</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w></span><span class=nt>portForwards</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span>- <span class=nt>guestSocket</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;/run/user/{{.UID}}/docker.sock&#34;</span><span class=w>
+</span><span class=w>    </span><span class=nt>hostSocket</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{.Home}}/opt/docker/docker.sock&#34;</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><ol start=3>
+<li>执行 <code>limactl start ./default.yaml</code> 启动虚拟机</li>
+</ol>
+<p>可以通过 <code>ps -ef</code> 看到</p>
+<pre tabindex=0><code>501  1589  1577   0 Sun07PM ttys001  1847:13.31 /usr/local/bin/qemu-system-x86_64 -cpu host -machine q35,accel=hvf -smp 2,sockets=1,cores=2,threads=1 -m 10240 -drive if=pflash,format=raw,readonly=on,file=/usr/local/share/qemu/edk2-x86_64-code.fd -boot order=c,splash-time=0,menu=on -drive file=/Users/nevill/.lima/default/diffdisk,if=virtio -cdrom /Users/nevill/.lima/default/cidata.iso -netdev user,id=net0,net=192.168.5.0/24,dhcpstart=192.168.5.15,hostfwd=tcp:127.0.0.1:60006-:22 -device virtio-net-pci,netdev=net0,mac=52:55:55:63:06:20 -device virtio-rng-pci -display none -device virtio-vga -device virtio-keyboard-pci -device virtio-mouse-pci -parallel none -chardev socket,id=char-serial,path=/Users/nevill/.lima/default/serial.sock,server=on,wait=off,logfile=/Users/nevill/.lima/default/serial.log -serial chardev:char-serial -chardev socket,id=char-qmp,path=/Users/nevill/.lima/default/qmp.sock,server=on,wait=off -qmp chardev:char-qmp -name lima-default -pidfile /Users/nevill/.lima/default/qemu.pid
+
+501  1643     1   0 Sun07PM ??         0:00.89 ssh: /Users/nevill/.lima/default/ssh.sock [mux]
+501  1649  1577   0 Sun07PM ttys001    0:00.01 ssh -F /dev/null -o IdentityFile=&quot;/Users/nevill/.lima/_config/user&quot; -o IdentityFile=&quot;/Users/nevill/.ssh/google_compute_engine&quot; -o IdentityFile=&quot;/Users/nevill/.ssh/id_rsa&quot; -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o NoHostAuthenticationForLocalhost=yes -o GSSAPIAuthentication=no -o PreferredAuthentications=publickey -o Compression=no -o BatchMode=yes -o IdentitiesOnly=yes -o Ciphers=&quot;^aes128-gcm@openssh.com,aes256-gcm@openssh.com&quot; -o User=nevill -o ControlMaster=auto -o ControlPath=&quot;/Users/nevill/.lima/default/ssh.sock&quot; -o ControlPersist=5m -p 60006 127.0.0.1 -- sshfs :/Users/nevill /Users/nevill -o slave -o ro -o allow_other
+501  1652  1577   0 Sun07PM ttys001    0:00.01 ssh -F /dev/null -o IdentityFile=&quot;/Users/nevill/.lima/_config/user&quot; -o IdentityFile=&quot;/Users/nevill/.ssh/google_compute_engine&quot; -o IdentityFile=&quot;/Users/nevill/.ssh/id_rsa&quot; -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o NoHostAuthenticationForLocalhost=yes -o GSSAPIAuthentication=no -o PreferredAuthentications=publickey -o Compression=no -o BatchMode=yes -o IdentitiesOnly=yes -o Ciphers=&quot;^aes128-gcm@openssh.com,aes256-gcm@openssh.com&quot; -o User=nevill -o ControlMaster=auto -o ControlPath=&quot;/Users/nevill/.lima/default/ssh.sock&quot; -o ControlPersist=5m -p 60006 127.0.0.1 -- sshfs :/tmp/lima /tmp/lima -o slave -o allow_other
+501  1662  1660   0 Sun07PM ttys001    0:00.01 /usr/bin/ssh -F /dev/null -o IdentityFile=&quot;/Users/nevill/.lima/_config/user&quot; -o IdentityFile=&quot;/Users/nevill/.ssh/google_compute_engine&quot; -o IdentityFile=&quot;/Users/nevill/.ssh/id_rsa&quot; -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o NoHostAuthenticationForLocalhost=yes -o GSSAPIAuthentication=no -o PreferredAuthentications=publickey -o Compression=no -o BatchMode=yes -o IdentitiesOnly=yes -o Ciphers=&quot;^aes128-gcm@openssh.com,aes256-gcm@openssh.com&quot; -o User=nevill -o ControlMaster=auto -o ControlPath=&quot;/Users/nevill/.lima/default/ssh.sock&quot; -o ControlPersist=5m -t -q -p 60006 127.0.0.1 -- cd &quot;/Users/nevill&quot; || cd &quot;/Users/nevill&quot; ; exec bash --login
+</code></pre><p>注意到 qemu 进程的存在，还有一些 ssh 进程用来转发端口。</p>
+<p>运行 <code>lima</code> 即可进入虚拟机访问。</p>
+<h2 id=安装并使用-docker>
+<a href=#%e5%ae%89%e8%a3%85%e5%b9%b6%e4%bd%bf%e7%94%a8-docker class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
+</a>
+安装并使用 Docker
+</h2>
+<ol>
+<li>在虚拟机里面安装 rootless docker [2]</li>
+</ol>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>$ lima
+nevill@lima-default:/Users/nevill$ curl -fsSL https://get.docker.com/rootless <span class=p>|</span> sh
+
+<span class=c1># 启动 docker 服务</span>
+nevill@lima-default:/Users/nevill$ systemctl --user daemon-reload
+nevill@lima-default:/Users/nevill$ systemctl --user restart docker
+
+<span class=c1># 虚拟机启动的时候启动容器服务</span>
+nevill@lima-default:/Users/nevill$ sudo loginctl enable-linger <span class=k>$(</span>whoami<span class=k>)</span>
+
+<span class=c1># 确定 docker 正常运行</span>
+nevill@lima-default:/Users/nevill$ docker info
+</code></pre></td></tr></table>
+</div>
+</div><ol start=2>
+<li>在主机环境中使用 docker</li>
+</ol>
+<p>安装 <a href=https://download.docker.com/mac/static/stable/x86_64/docker-20.10.9.tgz>docker cli</a></p>
+<blockquote>
+<p>nerdctl 当前还不能完全取代 docker-cli [1]。 至少需要等 kind 能够通过 nerdctl 正常启动我才会替换，目前依然使用 docker-cli 来进行容器、镜像的相关操作。</p>
+</blockquote>
+<p>运行 <code>DOCKER_HOST=unix:///Users/nevill/opt/docker/docker.sock docker info</code> 看是否能成功返回结果。</p>
+<p>如果成功可以执行 <code>docker context create lima-default --docker "host=unix:///Users/nevill/opt/docker/docker.sock"</code> 来保存。</p>
+<h2 id=同-docker-的兼容性>
+<a href=#%e5%90%8c-docker-%e7%9a%84%e5%85%bc%e5%ae%b9%e6%80%a7 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
+</a>
+同 Docker 的兼容性
+</h2>
+<p>Lima 会将主机的 $HOME 目录完全映射到虚拟机中，因此在主机的 $HOME 下执行类似 <code>docker run -v $PWD:/somedir</code> 的命令是完全可以正常工作的。</p>
+<h2 id=reference>
+<a href=#reference class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
+</a>
+Reference
+</h2>
+<ol>
+<li><a href=https://github.com/containerd/nerdctl/issues/349>https://github.com/containerd/nerdctl/issues/349</a></li>
+<li><a href=https://rootlesscontaine.rs/getting-started/docker/>https://rootlesscontaine.rs/getting-started/docker/</a></li>
+</ol>
+</div>
+</div>
+<div class=container>
+<nav class="flex container suggested">
+<a rel=prev href=/posts/k8s-hostnetwork-pod-ip/ title="Previous post (older)">
+<span>Previous</span>
+Kubernetes POD IP
+</a>
+</nav>
+</div>
+<div class=container>
+</div>
+</main>
+</main>
+<footer class="footer flex">
+<section class=container>
+<nav class=footer-links>
+<a href=/index.xml>RSS</a>
+</nav>
+</section>
+<script defer src=/ts/features.c81551cd4dbef120af278f16966a41142c02be9ff5d6a669be09820fbf047456.js data-enable-footnotes=true></script>
+</footer>
+</body>
+</html>

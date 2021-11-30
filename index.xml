@@ -1,4 +1,174 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>兵器谱 BingQiPu</title><link>https://nevill.github.io/</link><description>Recent content on 兵器谱 BingQiPu</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 15 Oct 2021 12:48:08 +0800</lastBuildDate><atom:link href="https://nevill.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Kubernetes POD IP</title><link>https://nevill.github.io/posts/k8s-hostnetwork-pod-ip/</link><pubDate>Fri, 15 Oct 2021 12:48:08 +0800</pubDate><guid>https://nevill.github.io/posts/k8s-hostnetwork-pod-ip/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>兵器谱 BingQiPu</title><link>https://nevill.github.io/</link><description>Recent content on 兵器谱 BingQiPu</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 29 Nov 2021 13:05:34 +0800</lastBuildDate><atom:link href="https://nevill.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Lima as Docker Destkop Alternative</title><link>https://nevill.github.io/posts/using-lima-as-docker-destkop-alternative/</link><pubDate>Mon, 29 Nov 2021 13:05:34 +0800</pubDate><guid>https://nevill.github.io/posts/using-lima-as-docker-destkop-alternative/</guid><description>
+&lt;p>随着 Docker Desktop 越来越笨重，我现在已经用 Lima 完全来替换掉它。&lt;/p>
+&lt;h2 id="介绍">
+&lt;a href="#%e4%bb%8b%e7%bb%8d" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+介绍
+&lt;/h2>
+&lt;p>&lt;a href="https://github.com/lima-vm/lima">Lima&lt;/a> 是一个在 macOS 上运行虚拟化 Linux 系统的工具。
+官方称可以把 Lima 理解为 &amp;ldquo;macOS subsystem for Linux&amp;rdquo; 或者 &amp;ldquo;containerd for Mac&amp;rdquo;。&lt;/p>
+&lt;h2 id="安装">
+&lt;a href="#%e5%ae%89%e8%a3%85" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+安装
+&lt;/h2>
+&lt;ol>
+&lt;li>在 macOS 主机上最简单的方式是通过 Homebrew 安装&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">brew install lima
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>我比较喜欢自己构建，会自己手动构建 qemu 以后放在 $HOME/.local 下&lt;/p>
+&lt;/blockquote>
+&lt;ol start="2">
+&lt;li>启动虚拟机&lt;/li>
+&lt;/ol>
+&lt;p>创建一个 &lt;code>default.yaml&lt;/code>，内容如下（根据自己主机的情况调整 memory 和 disk 大小）&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">cpus&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">memory&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;10GiB&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">disk&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;100GiB&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">images&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">location&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;https://cloud-images.ubuntu.com/impish/current/impish-server-cloudimg-amd64.img&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">arch&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;x86_64&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">mounts&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">location&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;~&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">writable&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">location&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;/tmp/lima&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">writable&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">ssh&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">localPort&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">60006&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">containerd&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">system&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">user&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">portForwards&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">guestSocket&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;/run/user/{{.UID}}/docker.sock&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">hostSocket&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;{{.Home}}/opt/docker/docker.sock&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="3">
+&lt;li>执行 &lt;code>limactl start ./default.yaml&lt;/code> 启动虚拟机&lt;/li>
+&lt;/ol>
+&lt;p>可以通过 &lt;code>ps -ef&lt;/code> 看到&lt;/p>
+&lt;pre tabindex="0">&lt;code>501 1589 1577 0 Sun07PM ttys001 1847:13.31 /usr/local/bin/qemu-system-x86_64 -cpu host -machine q35,accel=hvf -smp 2,sockets=1,cores=2,threads=1 -m 10240 -drive if=pflash,format=raw,readonly=on,file=/usr/local/share/qemu/edk2-x86_64-code.fd -boot order=c,splash-time=0,menu=on -drive file=/Users/nevill/.lima/default/diffdisk,if=virtio -cdrom /Users/nevill/.lima/default/cidata.iso -netdev user,id=net0,net=192.168.5.0/24,dhcpstart=192.168.5.15,hostfwd=tcp:127.0.0.1:60006-:22 -device virtio-net-pci,netdev=net0,mac=52:55:55:63:06:20 -device virtio-rng-pci -display none -device virtio-vga -device virtio-keyboard-pci -device virtio-mouse-pci -parallel none -chardev socket,id=char-serial,path=/Users/nevill/.lima/default/serial.sock,server=on,wait=off,logfile=/Users/nevill/.lima/default/serial.log -serial chardev:char-serial -chardev socket,id=char-qmp,path=/Users/nevill/.lima/default/qmp.sock,server=on,wait=off -qmp chardev:char-qmp -name lima-default -pidfile /Users/nevill/.lima/default/qemu.pid
+501 1643 1 0 Sun07PM ?? 0:00.89 ssh: /Users/nevill/.lima/default/ssh.sock [mux]
+501 1649 1577 0 Sun07PM ttys001 0:00.01 ssh -F /dev/null -o IdentityFile=&amp;quot;/Users/nevill/.lima/_config/user&amp;quot; -o IdentityFile=&amp;quot;/Users/nevill/.ssh/google_compute_engine&amp;quot; -o IdentityFile=&amp;quot;/Users/nevill/.ssh/id_rsa&amp;quot; -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o NoHostAuthenticationForLocalhost=yes -o GSSAPIAuthentication=no -o PreferredAuthentications=publickey -o Compression=no -o BatchMode=yes -o IdentitiesOnly=yes -o Ciphers=&amp;quot;^aes128-gcm@openssh.com,aes256-gcm@openssh.com&amp;quot; -o User=nevill -o ControlMaster=auto -o ControlPath=&amp;quot;/Users/nevill/.lima/default/ssh.sock&amp;quot; -o ControlPersist=5m -p 60006 127.0.0.1 -- sshfs :/Users/nevill /Users/nevill -o slave -o ro -o allow_other
+501 1652 1577 0 Sun07PM ttys001 0:00.01 ssh -F /dev/null -o IdentityFile=&amp;quot;/Users/nevill/.lima/_config/user&amp;quot; -o IdentityFile=&amp;quot;/Users/nevill/.ssh/google_compute_engine&amp;quot; -o IdentityFile=&amp;quot;/Users/nevill/.ssh/id_rsa&amp;quot; -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o NoHostAuthenticationForLocalhost=yes -o GSSAPIAuthentication=no -o PreferredAuthentications=publickey -o Compression=no -o BatchMode=yes -o IdentitiesOnly=yes -o Ciphers=&amp;quot;^aes128-gcm@openssh.com,aes256-gcm@openssh.com&amp;quot; -o User=nevill -o ControlMaster=auto -o ControlPath=&amp;quot;/Users/nevill/.lima/default/ssh.sock&amp;quot; -o ControlPersist=5m -p 60006 127.0.0.1 -- sshfs :/tmp/lima /tmp/lima -o slave -o allow_other
+501 1662 1660 0 Sun07PM ttys001 0:00.01 /usr/bin/ssh -F /dev/null -o IdentityFile=&amp;quot;/Users/nevill/.lima/_config/user&amp;quot; -o IdentityFile=&amp;quot;/Users/nevill/.ssh/google_compute_engine&amp;quot; -o IdentityFile=&amp;quot;/Users/nevill/.ssh/id_rsa&amp;quot; -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o NoHostAuthenticationForLocalhost=yes -o GSSAPIAuthentication=no -o PreferredAuthentications=publickey -o Compression=no -o BatchMode=yes -o IdentitiesOnly=yes -o Ciphers=&amp;quot;^aes128-gcm@openssh.com,aes256-gcm@openssh.com&amp;quot; -o User=nevill -o ControlMaster=auto -o ControlPath=&amp;quot;/Users/nevill/.lima/default/ssh.sock&amp;quot; -o ControlPersist=5m -t -q -p 60006 127.0.0.1 -- cd &amp;quot;/Users/nevill&amp;quot; || cd &amp;quot;/Users/nevill&amp;quot; ; exec bash --login
+&lt;/code>&lt;/pre>&lt;p>注意到 qemu 进程的存在，还有一些 ssh 进程用来转发端口。&lt;/p>
+&lt;p>运行 &lt;code>lima&lt;/code> 即可进入虚拟机访问。&lt;/p>
+&lt;h2 id="安装并使用-docker">
+&lt;a href="#%e5%ae%89%e8%a3%85%e5%b9%b6%e4%bd%bf%e7%94%a8-docker" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+安装并使用 Docker
+&lt;/h2>
+&lt;ol>
+&lt;li>在虚拟机里面安装 rootless docker [2]&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">$ lima
+nevill@lima-default:/Users/nevill$ curl -fsSL https://get.docker.com/rootless &lt;span class="p">|&lt;/span> sh
+&lt;span class="c1"># 启动 docker 服务&lt;/span>
+nevill@lima-default:/Users/nevill$ systemctl --user daemon-reload
+nevill@lima-default:/Users/nevill$ systemctl --user restart docker
+&lt;span class="c1"># 虚拟机启动的时候启动容器服务&lt;/span>
+nevill@lima-default:/Users/nevill$ sudo loginctl enable-linger &lt;span class="k">$(&lt;/span>whoami&lt;span class="k">)&lt;/span>
+&lt;span class="c1"># 确定 docker 正常运行&lt;/span>
+nevill@lima-default:/Users/nevill$ docker info
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="2">
+&lt;li>在主机环境中使用 docker&lt;/li>
+&lt;/ol>
+&lt;p>安装 &lt;a href="https://download.docker.com/mac/static/stable/x86_64/docker-20.10.9.tgz">docker cli&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>nerdctl 当前还不能完全取代 docker-cli [1]。 至少需要等 kind 能够通过 nerdctl 正常启动我才会替换，目前依然使用 docker-cli 来进行容器、镜像的相关操作。&lt;/p>
+&lt;/blockquote>
+&lt;p>运行 &lt;code>DOCKER_HOST=unix:///Users/nevill/opt/docker/docker.sock docker info&lt;/code> 看是否能成功返回结果。&lt;/p>
+&lt;p>如果成功可以执行 &lt;code>docker context create lima-default --docker &amp;quot;host=unix:///Users/nevill/opt/docker/docker.sock&amp;quot;&lt;/code> 来保存。&lt;/p>
+&lt;h2 id="同-docker-的兼容性">
+&lt;a href="#%e5%90%8c-docker-%e7%9a%84%e5%85%bc%e5%ae%b9%e6%80%a7" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+同 Docker 的兼容性
+&lt;/h2>
+&lt;p>Lima 会将主机的 $HOME 目录完全映射到虚拟机中，因此在主机的 $HOME 下执行类似 &lt;code>docker run -v $PWD:/somedir&lt;/code> 的命令是完全可以正常工作的。&lt;/p>
+&lt;h2 id="reference">
+&lt;a href="#reference" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+Reference
+&lt;/h2>
+&lt;ol>
+&lt;li>&lt;a href="https://github.com/containerd/nerdctl/issues/349">https://github.com/containerd/nerdctl/issues/349&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://rootlesscontaine.rs/getting-started/docker/">https://rootlesscontaine.rs/getting-started/docker/&lt;/a>&lt;/li>
+&lt;/ol></description></item><item><title>Kubernetes POD IP</title><link>https://nevill.github.io/posts/k8s-hostnetwork-pod-ip/</link><pubDate>Fri, 15 Oct 2021 12:48:08 +0800</pubDate><guid>https://nevill.github.io/posts/k8s-hostnetwork-pod-ip/</guid><description>
 &lt;p>最近在本地尝试&lt;a href="https://github.com/nevill/learn-k8s">Kubernetes 集群的搭建&lt;/a>。&lt;/p>
 &lt;p>一个主机有两张网卡，在安装完集群以后，发现 Pod 里分配的 IP 全部都是主机第一张网卡的 IP。
 而这个环境是 Vagrant + Virtualbox 安装，第一张网卡的 IP 地址也都是固定的。&lt;/p>
