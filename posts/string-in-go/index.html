@@ -1,0 +1,208 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=theme-color content="dark">
+<title>String in Go | 兵器谱 BingQiPu</title>
+<meta property="og:site_name" content>
+<meta property="og:title" content="String in Go | 兵器谱 BingQiPu">
+<meta itemprop=name content="String in Go | 兵器谱 BingQiPu">
+<meta name=twitter:title content="String in Go | 兵器谱 BingQiPu">
+<meta name=application-name content="String in Go | 兵器谱 BingQiPu">
+<meta name=description content>
+<meta name=twitter:description content>
+<meta itemprop=description content>
+<meta property="og:description" content>
+<link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=stylesheet href=/sass/main.min.ab99ff095f832511e24ffb2fba2b51ad473b2f7e9301d674eba2c6c3a6e8bd81.css>
+</head>
+<script>(function(){const b='ThemeColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.userColorScheme='dark':document.documentElement.dataset.userColorScheme='light'})()</script>
+<body class=dark>
+<nav class=navbar>
+<div class=container>
+<div class=flex>
+<div>
+<a class=brand href=/>
+兵器谱 BingQiPu
+</a>
+</div>
+<div class=flex>
+<a href=/articles/>Articles</a>
+<button id=dark-mode-button><svg class="light" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)" viewBox="0 0 36 36"><path fill="#ffd983" d="M30.312.776C32 19 20 32 .776 30.312c8.199 7.717 21.091 7.588 29.107-.429C37.9 21.867 38.03 8.975 30.312.776z"/><path d="M30.705 15.915a1.163 1.163.0 101.643 1.641 1.163 1.163.0 00-1.643-1.641zm-16.022 14.38a1.74 1.74.0 000 2.465 1.742 1.742.0 100-2.465zm13.968-2.147a2.904 2.904.0 01-4.108.0 2.902 2.902.0 010-4.107 2.902 2.902.0 014.108.0 2.902 2.902.0 010 4.107z" fill="#ffcc4d"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)"/></svg><svg class="dark" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)" viewBox="0 0 36 36"><path fill="#ffd983" d="M16 2s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2V2zm18 14s2 0 2 2-2 2-2 2h-2s-2 0-2-2 2-2 2-2h2zM4 16s2 0 2 2-2 2-2 2H2s-2 0-2-2 2-2 2-2h2zm5.121-8.707s1.414 1.414.0 2.828-2.828.0-2.828.0L4.878 8.708s-1.414-1.414.0-2.829c1.415-1.414 2.829.0 2.829.0l1.414 1.414zm21 21s1.414 1.414.0 2.828-2.828.0-2.828.0l-1.414-1.414s-1.414-1.414.0-2.828 2.828.0 2.828.0l1.414 1.414zm-.413-18.172s-1.414 1.414-2.828.0.0-2.828.0-2.828l1.414-1.414s1.414-1.414 2.828.0.0 2.828.0 2.828l-1.414 1.414zm-21 21s-1.414 1.414-2.828.0.0-2.828.0-2.828l1.414-1.414s1.414-1.414 2.828.0.0 2.828.0 2.828l-1.414 1.414zM16 32s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2v-2z"/><circle fill="#ffd983" cx="18" cy="18" r="10"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)"/></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<main>
+<div class=container>
+<article>
+<header class=article-header>
+<div class=thumb>
+<div>
+<h1>String in Go</h1>
+<div class=post-meta>
+<div>
+By Nevill | <time>January 11, 2022</time>
+| 2 minutes
+</div>
+<div class=tags>
+</div>
+</div>
+</div>
+</div>
+</header>
+</article>
+<div class=article-post>
+<p>运行一个取字符串地址的程序</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// hello.go
+</span><span class=c1></span><span class=kn>package</span> <span class=nx>main</span>
+
+<span class=kn>import</span> <span class=p>(</span>
+	<span class=s>&#34;fmt&#34;</span>
+<span class=p>)</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+	<span class=nx>str</span> <span class=o>:=</span> <span class=s>&#34;Hello Golang!&#34;</span>
+	<span class=nx>strPtr</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>str</span>
+	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;address of str = %p\n&#34;</span><span class=p>,</span> <span class=nx>strPtr</span><span class=p>)</span>
+	<span class=nx>byteArray</span> <span class=o>:=</span> <span class=p>[]</span><span class=nb>byte</span><span class=p>(</span><span class=nx>str</span><span class=p>)</span>
+	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;address of byte array = %p\n&#34;</span><span class=p>,</span> <span class=nx>byteArray</span><span class=p>)</span>
+	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Scanln</span><span class=p>()</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>观察到输出</p>
+<pre tabindex=0><code>address of str = 0xc00008a210
+address of byte array = 0xc0000ac000
+</code></pre><p>这两个地址的值并不相同。</p>
+<p>正好在学习使用 crash utility，可以用来观察一下内存结构</p>
+<pre tabindex=0><code>crash&gt; rd -32 0xc00008a210 8
+      c00008a210:  004a3cfc 00000000 0000000d 00000000   .&lt;J.............
+      c00008a220:  005383e0 00000000 00538420 00000000   ..S..... .S.....
+
+crash&gt; rd -a 0xc0000ac000
+      c0000ac000:  Hello Golang!
+</code></pre><p>猜测，0xc00008c210 这个指针指向了一个字符串真正的地址，即 0x004a3cfc 才是存放的内存地址。
+尝试读取一下：</p>
+<pre tabindex=0><code>crash&gt; rd -8 0x004a3cfc 32
+          4a3cfc:  48 65 6c 6c 6f 20 47 6f 6c 61 6e 67 21 4d 61 73   Hello Golang!Mas
+          4a3d0c:  61 72 61 6d 5f 47 6f 6e 64 69 4d 65 6e 64 65 5f   aram_GondiMende_
+</code></pre><p>果然找到了。</p>
+<p>翻一下代码，有一个 stringStruct</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// runtime/string.go
+</span><span class=c1></span><span class=kd>type</span> <span class=nx>stringStruct</span> <span class=kd>struct</span> <span class=p>{</span>
+	<span class=nx>str</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nx>Pointer</span>
+	<span class=nx>len</span> <span class=kt>int</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>同时，观察到 0xc00008a218 这个地址的值 0x0000000d 即 <code>Hello Golang!</code> 字符串的长度 13。即验证了 0xc00008a210 这个地址对应的结构体。
+那么通过 <code>[]byte(str)</code> 强制转换以后为什么会返回另外一个内存地址 0xc0000ac000 而没有返回 0x004a3cfc 呢？
+原因也很简单， string 类型应该是不可修改的 (immutable)[1]，也无法通过 <code>&str[i]</code> 来获取其某一个 byte 的地址。</p>
+<p>可以查看一下汇编：</p>
+<pre tabindex=0><code>// go tool compile -S hello.go
+// ...
+	0x0085 00133 (hello.go:11)	MOVQ	&quot;&quot;.&amp;str+56(SP), CX
+	0x008a 00138 (hello.go:11)	MOVQ	(CX), BX
+	0x008d 00141 (hello.go:11)	MOVQ	8(CX), CX
+	0x0091 00145 (hello.go:11)	XORL	AX, AX
+	0x0093 00147 (hello.go:11)	PCDATA	$1, $0
+	0x0093 00147 (hello.go:11)	CALL	runtime.stringtoslicebyte(SB)
+	0x0098 00152 (hello.go:12)	CALL	runtime.convTslice(SB)
+	0x009d 00157 (hello.go:12)	MOVUPS	X15, &quot;&quot;..autotmp_29+64(SP)
+	0x00a3 00163 (hello.go:12)	LEAQ	type.[]uint8(SB), CX
+	0x00aa 00170 (hello.go:12)	MOVQ	CX, &quot;&quot;..autotmp_29+64(SP)
+	0x00af 00175 (hello.go:12)	MOVQ	AX, &quot;&quot;..autotmp_29+72(SP)
+// ...
+</code></pre><p>这里调用了一个 runtime.stringtoslicebyte</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>stringtoslicebyte</span><span class=p>(</span><span class=nx>buf</span> <span class=o>*</span><span class=nx>tmpBuf</span><span class=p>,</span> <span class=nx>s</span> <span class=kt>string</span><span class=p>)</span> <span class=p>[]</span><span class=kt>byte</span> <span class=p>{</span>
+	<span class=kd>var</span> <span class=nx>b</span> <span class=p>[]</span><span class=kt>byte</span>
+	<span class=k>if</span> <span class=nx>buf</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=o>&amp;&amp;</span> <span class=nb>len</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span> <span class=o>&lt;=</span> <span class=nb>len</span><span class=p>(</span><span class=nx>buf</span><span class=p>)</span> <span class=p>{</span>
+		<span class=o>*</span><span class=nx>buf</span> <span class=p>=</span> <span class=nx>tmpBuf</span><span class=p>{}</span>
+		<span class=nx>b</span> <span class=p>=</span> <span class=nx>buf</span><span class=p>[:</span><span class=nb>len</span><span class=p>(</span><span class=nx>s</span><span class=p>)]</span>
+	<span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+		<span class=nx>b</span> <span class=p>=</span> <span class=nf>rawbyteslice</span><span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=nx>s</span><span class=p>))</span>
+	<span class=p>}</span>
+	<span class=nb>copy</span><span class=p>(</span><span class=nx>b</span><span class=p>,</span> <span class=nx>s</span><span class=p>)</span>
+	<span class=k>return</span> <span class=nx>b</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看到，最后会调用 <code>copy</code> 将源内容复制到一个新的 <code>[]byte</code> 切片中。</p>
+<p>总结一下：</p>
+<ol>
+<li>string 类型结构仅含两个元素，一个指向具体内容的指针和字符串长度</li>
+<li>string 类型是不可修改的，所以在强制转换类型的时候发生了复制</li>
+<li>写这篇主要目的是展示 crash utility 怎么用 :)</li>
+</ol>
+<p>参考：
+[1] <a href=https://go.dev/ref/spec#String_types>https://go.dev/ref/spec#String_types</a></p>
+</div>
+</div>
+<div class=container>
+<nav class="flex container suggested">
+<a rel=prev href=/posts/using-lima-as-docker-destkop-alternative/ title="Previous post (older)">
+<span>Previous</span>
+Using Lima as Docker Destkop Alternative
+</a>
+</nav>
+</div>
+<div class=container>
+</div>
+</main>
+</main>
+<footer class="footer flex">
+<section class=container>
+<nav class=footer-links>
+<a href=/index.xml>RSS</a>
+</nav>
+</section>
+<script defer src=/ts/features.c81551cd4dbef120af278f16966a41142c02be9ff5d6a669be09820fbf047456.js data-enable-footnotes=true></script>
+</footer>
+</body>
+</html>

@@ -1,4 +1,128 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>兵器谱 BingQiPu</title><link>https://nevill.github.io/</link><description>Recent content on 兵器谱 BingQiPu</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 29 Nov 2021 13:05:34 +0800</lastBuildDate><atom:link href="https://nevill.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Lima as Docker Destkop Alternative</title><link>https://nevill.github.io/posts/using-lima-as-docker-destkop-alternative/</link><pubDate>Mon, 29 Nov 2021 13:05:34 +0800</pubDate><guid>https://nevill.github.io/posts/using-lima-as-docker-destkop-alternative/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>兵器谱 BingQiPu</title><link>https://nevill.github.io/</link><description>Recent content on 兵器谱 BingQiPu</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 11 Jan 2022 17:08:18 +0800</lastBuildDate><atom:link href="https://nevill.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>String in Go</title><link>https://nevill.github.io/posts/string-in-go/</link><pubDate>Tue, 11 Jan 2022 17:08:18 +0800</pubDate><guid>https://nevill.github.io/posts/string-in-go/</guid><description>
+&lt;p>运行一个取字符串地址的程序&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="c1">// hello.go
+&lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="kn">package&lt;/span> &lt;span class="nx">main&lt;/span>
+&lt;span class="kn">import&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;span class="s">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;span class="p">)&lt;/span>
+&lt;span class="kd">func&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">str&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="s">&amp;#34;Hello Golang!&amp;#34;&lt;/span>
+&lt;span class="nx">strPtr&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="nx">str&lt;/span>
+&lt;span class="nx">fmt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;address of str = %p\n&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">strPtr&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="nx">byteArray&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="p">[]&lt;/span>&lt;span class="nb">byte&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">str&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="nx">fmt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;address of byte array = %p\n&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">byteArray&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="nx">fmt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Scanln&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>观察到输出&lt;/p>
+&lt;pre tabindex="0">&lt;code>address of str = 0xc00008a210
+address of byte array = 0xc0000ac000
+&lt;/code>&lt;/pre>&lt;p>这两个地址的值并不相同。&lt;/p>
+&lt;p>正好在学习使用 crash utility，可以用来观察一下内存结构&lt;/p>
+&lt;pre tabindex="0">&lt;code>crash&amp;gt; rd -32 0xc00008a210 8
+c00008a210: 004a3cfc 00000000 0000000d 00000000 .&amp;lt;J.............
+c00008a220: 005383e0 00000000 00538420 00000000 ..S..... .S.....
+crash&amp;gt; rd -a 0xc0000ac000
+c0000ac000: Hello Golang!
+&lt;/code>&lt;/pre>&lt;p>猜测，0xc00008c210 这个指针指向了一个字符串真正的地址，即 0x004a3cfc 才是存放的内存地址。
+尝试读取一下：&lt;/p>
+&lt;pre tabindex="0">&lt;code>crash&amp;gt; rd -8 0x004a3cfc 32
+4a3cfc: 48 65 6c 6c 6f 20 47 6f 6c 61 6e 67 21 4d 61 73 Hello Golang!Mas
+4a3d0c: 61 72 61 6d 5f 47 6f 6e 64 69 4d 65 6e 64 65 5f aram_GondiMende_
+&lt;/code>&lt;/pre>&lt;p>果然找到了。&lt;/p>
+&lt;p>翻一下代码，有一个 stringStruct&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="c1">// runtime/string.go
+&lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="kd">type&lt;/span> &lt;span class="nx">stringStruct&lt;/span> &lt;span class="kd">struct&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">str&lt;/span> &lt;span class="nx">unsafe&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Pointer&lt;/span>
+&lt;span class="nx">len&lt;/span> &lt;span class="kt">int&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>同时，观察到 0xc00008a218 这个地址的值 0x0000000d 即 &lt;code>Hello Golang!&lt;/code> 字符串的长度 13。即验证了 0xc00008a210 这个地址对应的结构体。
+那么通过 &lt;code>[]byte(str)&lt;/code> 强制转换以后为什么会返回另外一个内存地址 0xc0000ac000 而没有返回 0x004a3cfc 呢？
+原因也很简单， string 类型应该是不可修改的 (immutable)[1]，也无法通过 &lt;code>&amp;amp;str[i]&lt;/code> 来获取其某一个 byte 的地址。&lt;/p>
+&lt;p>可以查看一下汇编：&lt;/p>
+&lt;pre tabindex="0">&lt;code>// go tool compile -S hello.go
+// ...
+0x0085 00133 (hello.go:11) MOVQ &amp;quot;&amp;quot;.&amp;amp;str+56(SP), CX
+0x008a 00138 (hello.go:11) MOVQ (CX), BX
+0x008d 00141 (hello.go:11) MOVQ 8(CX), CX
+0x0091 00145 (hello.go:11) XORL AX, AX
+0x0093 00147 (hello.go:11) PCDATA $1, $0
+0x0093 00147 (hello.go:11) CALL runtime.stringtoslicebyte(SB)
+0x0098 00152 (hello.go:12) CALL runtime.convTslice(SB)
+0x009d 00157 (hello.go:12) MOVUPS X15, &amp;quot;&amp;quot;..autotmp_29+64(SP)
+0x00a3 00163 (hello.go:12) LEAQ type.[]uint8(SB), CX
+0x00aa 00170 (hello.go:12) MOVQ CX, &amp;quot;&amp;quot;..autotmp_29+64(SP)
+0x00af 00175 (hello.go:12) MOVQ AX, &amp;quot;&amp;quot;..autotmp_29+72(SP)
+// ...
+&lt;/code>&lt;/pre>&lt;p>这里调用了一个 runtime.stringtoslicebyte&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="kd">func&lt;/span> &lt;span class="nf">stringtoslicebyte&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">buf&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="nx">tmpBuf&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">s&lt;/span> &lt;span class="kt">string&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">[]&lt;/span>&lt;span class="kt">byte&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">b&lt;/span> &lt;span class="p">[]&lt;/span>&lt;span class="kt">byte&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="nx">buf&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nb">len&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">s&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">&amp;lt;=&lt;/span> &lt;span class="nb">len&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">buf&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="o">*&lt;/span>&lt;span class="nx">buf&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="nx">tmpBuf&lt;/span>&lt;span class="p">{}&lt;/span>
+&lt;span class="nx">b&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="nx">buf&lt;/span>&lt;span class="p">[:&lt;/span>&lt;span class="nb">len&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">s&lt;/span>&lt;span class="p">)]&lt;/span>
+&lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">b&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="nf">rawbyteslice&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">len&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">s&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="nb">copy&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">b&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">s&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="nx">b&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>可以看到，最后会调用 &lt;code>copy&lt;/code> 将源内容复制到一个新的 &lt;code>[]byte&lt;/code> 切片中。&lt;/p>
+&lt;p>总结一下：&lt;/p>
+&lt;ol>
+&lt;li>string 类型结构仅含两个元素，一个指向具体内容的指针和字符串长度&lt;/li>
+&lt;li>string 类型是不可修改的，所以在强制转换类型的时候发生了复制&lt;/li>
+&lt;li>写这篇主要目的是展示 crash utility 怎么用 :)&lt;/li>
+&lt;/ol>
+&lt;p>参考：
+[1] &lt;a href="https://go.dev/ref/spec#String_types">https://go.dev/ref/spec#String_types&lt;/a>&lt;/p></description></item><item><title>Using Lima as Docker Destkop Alternative</title><link>https://nevill.github.io/posts/using-lima-as-docker-destkop-alternative/</link><pubDate>Mon, 29 Nov 2021 13:05:34 +0800</pubDate><guid>https://nevill.github.io/posts/using-lima-as-docker-destkop-alternative/</guid><description>
 &lt;p>随着 Docker Desktop 越来越笨重，我现在已经用 Lima 完全来替换掉它。&lt;/p>
 &lt;h2 id="介绍">
 &lt;a href="#%e4%bb%8b%e7%bb%8d" class="anchor">
