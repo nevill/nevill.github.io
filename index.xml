@@ -69,7 +69,7 @@ c0000ac000: Hello Golang!
 &lt;/div>
 &lt;/div>&lt;p>同时，观察到 0xc00008a218 这个地址的值 0x0000000d 即 &lt;code>Hello Golang!&lt;/code> 字符串的长度 13。即验证了 0xc00008a210 这个地址对应的结构体。
 那么通过 &lt;code>[]byte(str)&lt;/code> 强制转换以后为什么会返回另外一个内存地址 0xc0000ac000 而没有返回 0x004a3cfc 呢？
-原因也很简单， string 类型应该是不可修改的 (immutable)[1]，也无法通过 &lt;code>&amp;amp;str[i]&lt;/code> 来获取其某一个 byte 的地址。&lt;/p>
+原因也很简单， string 类型应该是不可修改的 (immutable)[^1]，也无法通过 &lt;code>&amp;amp;str[i]&lt;/code> 来获取其某一个 byte 的地址。&lt;/p>
 &lt;p>可以查看一下汇编：&lt;/p>
 &lt;pre tabindex="0">&lt;code>// go tool compile -S hello.go
 // ...
@@ -122,7 +122,7 @@ c0000ac000: Hello Golang!
 &lt;li>写这篇主要目的是展示 crash utility 怎么用 :)&lt;/li>
 &lt;/ol>
 &lt;p>参考：
-[1] &lt;a href="https://go.dev/ref/spec#String_types">https://go.dev/ref/spec#String_types&lt;/a>&lt;/p></description></item><item><title>Using Lima as Docker Destkop Alternative</title><link>https://nevill.github.io/posts/using-lima-as-docker-destkop-alternative/</link><pubDate>Mon, 29 Nov 2021 13:05:34 +0800</pubDate><guid>https://nevill.github.io/posts/using-lima-as-docker-destkop-alternative/</guid><description>
+[^1] &lt;a href="https://go.dev/ref/spec#String_types">https://go.dev/ref/spec#String_types&lt;/a>&lt;/p></description></item><item><title>Using Lima as Docker Destkop Alternative</title><link>https://nevill.github.io/posts/using-lima-as-docker-destkop-alternative/</link><pubDate>Mon, 29 Nov 2021 13:05:34 +0800</pubDate><guid>https://nevill.github.io/posts/using-lima-as-docker-destkop-alternative/</guid><description>
 &lt;p>随着 Docker Desktop 越来越笨重，我现在已经用 Lima 完全来替换掉它。&lt;/p>
 &lt;h2 id="介绍">
 &lt;a href="#%e4%bb%8b%e7%bb%8d" class="anchor">

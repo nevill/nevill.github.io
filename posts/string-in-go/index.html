@@ -128,7 +128,7 @@ crash&gt; rd -a 0xc0000ac000
 </div>
 </div><p>同时，观察到 0xc00008a218 这个地址的值 0x0000000d 即 <code>Hello Golang!</code> 字符串的长度 13。即验证了 0xc00008a210 这个地址对应的结构体。
 那么通过 <code>[]byte(str)</code> 强制转换以后为什么会返回另外一个内存地址 0xc0000ac000 而没有返回 0x004a3cfc 呢？
-原因也很简单， string 类型应该是不可修改的 (immutable)[1]，也无法通过 <code>&str[i]</code> 来获取其某一个 byte 的地址。</p>
+原因也很简单， string 类型应该是不可修改的 (immutable)[^1]，也无法通过 <code>&str[i]</code> 来获取其某一个 byte 的地址。</p>
 <p>可以查看一下汇编：</p>
 <pre tabindex=0><code>// go tool compile -S hello.go
 // ...
@@ -181,7 +181,7 @@ crash&gt; rd -a 0xc0000ac000
 <li>写这篇主要目的是展示 crash utility 怎么用 :)</li>
 </ol>
 <p>参考：
-[1] <a href=https://go.dev/ref/spec#String_types>https://go.dev/ref/spec#String_types</a></p>
+[^1] <a href=https://go.dev/ref/spec#String_types>https://go.dev/ref/spec#String_types</a></p>
 </div>
 </div>
 <div class=container>
