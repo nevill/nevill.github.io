@@ -1,0 +1,224 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=theme-color content="dark">
+<title>Unraid Passthrough | 兵器谱 BingQiPu</title>
+<meta property="og:site_name" content>
+<meta property="og:title" content="Unraid Passthrough | 兵器谱 BingQiPu">
+<meta itemprop=name content="Unraid Passthrough | 兵器谱 BingQiPu">
+<meta name=twitter:title content="Unraid Passthrough | 兵器谱 BingQiPu">
+<meta name=application-name content="Unraid Passthrough | 兵器谱 BingQiPu">
+<meta name=description content>
+<meta name=twitter:description content>
+<meta itemprop=description content>
+<meta property="og:description" content>
+<link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=stylesheet href=/sass/main.min.ab99ff095f832511e24ffb2fba2b51ad473b2f7e9301d674eba2c6c3a6e8bd81.css>
+</head>
+<script>(function(){const b='ThemeColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.userColorScheme='dark':document.documentElement.dataset.userColorScheme='light'})()</script>
+<body class=dark>
+<nav class=navbar>
+<div class=container>
+<div class=flex>
+<div>
+<a class=brand href=/>
+兵器谱 BingQiPu
+</a>
+</div>
+<div class=flex>
+<a href=/articles/>Articles</a>
+<button id=dark-mode-button><svg class="light" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)" viewBox="0 0 36 36"><path fill="#ffd983" d="M30.312.776C32 19 20 32 .776 30.312c8.199 7.717 21.091 7.588 29.107-.429C37.9 21.867 38.03 8.975 30.312.776z"/><path d="M30.705 15.915a1.163 1.163.0 101.643 1.641 1.163 1.163.0 00-1.643-1.641zm-16.022 14.38a1.74 1.74.0 000 2.465 1.742 1.742.0 100-2.465zm13.968-2.147a2.904 2.904.0 01-4.108.0 2.902 2.902.0 010-4.107 2.902 2.902.0 014.108.0 2.902 2.902.0 010 4.107z" fill="#ffcc4d"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)"/></svg><svg class="dark" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)" viewBox="0 0 36 36"><path fill="#ffd983" d="M16 2s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2V2zm18 14s2 0 2 2-2 2-2 2h-2s-2 0-2-2 2-2 2-2h2zM4 16s2 0 2 2-2 2-2 2H2s-2 0-2-2 2-2 2-2h2zm5.121-8.707s1.414 1.414.0 2.828-2.828.0-2.828.0L4.878 8.708s-1.414-1.414.0-2.829c1.415-1.414 2.829.0 2.829.0l1.414 1.414zm21 21s1.414 1.414.0 2.828-2.828.0-2.828.0l-1.414-1.414s-1.414-1.414.0-2.828 2.828.0 2.828.0l1.414 1.414zm-.413-18.172s-1.414 1.414-2.828.0.0-2.828.0-2.828l1.414-1.414s1.414-1.414 2.828.0.0 2.828.0 2.828l-1.414 1.414zm-21 21s-1.414 1.414-2.828.0.0-2.828.0-2.828l1.414-1.414s1.414-1.414 2.828.0.0 2.828.0 2.828l-1.414 1.414zM16 32s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2v-2z"/><circle fill="#ffd983" cx="18" cy="18" r="10"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)"/></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<main>
+<div class=container>
+<article>
+<header class=article-header>
+<div class=thumb>
+<div>
+<h1>Unraid Passthrough</h1>
+<div class=post-meta>
+<div>
+By Nevill | <time>November 27, 2022</time>
+| 2 minutes
+</div>
+<div class=tags>
+</div>
+</div>
+</div>
+</div>
+</header>
+</article>
+<div class=article-post>
+<p>总结记录一下在 unRAID(v6.11) 中如何直通核显 gpu，usb 设备等。</p>
+<pre tabindex=0><code>CPU: AMD R7-5700G
+Motherboard: Asus TUF Gaming B550 Plus WIFI II
+Memory: 2 x 32G DDR3200
+</code></pre><h1 id=主机配置>
+<a href=#%e4%b8%bb%e6%9c%ba%e9%85%8d%e7%bd%ae class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
+</a>
+主机配置
+</h1>
+<ol>
+<li>设置 unRAID 启动方式为 Legacy。在主机的 BIOS 设置打开 CSM / Legacy Boot 等选项。</li>
+<li>设置内置显卡为主要启动项，打开 multiple display 选项，并分配最大的共享内存。</li>
+<li>打开 SVM（虚拟化支持）选项。</li>
+</ol>
+<h1 id=设置-unraid>
+<a href=#%e8%ae%be%e7%bd%ae-unraid class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
+</a>
+设置 unRAID
+</h1>
+<ol>
+<li>
+<p>进入 unRAID 中配置 System Devices 分组，并选定 Bind Selected to IOMMU 中分得越开越利于后续步骤，具体操作步骤可以参考[1]。需要注意的是，通过反复拔插确定好需要直通的 usb port 的位置以及对应的 usb controller，后面整个直通给虚拟机，这样子虚拟机就可以轻松使用 usb 设备了。</p>
+</li>
+<li>
+<p>在 unRAID 中禁用 amdgpu 内核模块(因为后面需要直通它，主机就不使用了)</p>
+</li>
+</ol>
+<pre tabindex=0><code># /boot/config/modprobe.d/amdgpu.conf
+
+blacklist amdgpu
+</code></pre><ol start=3>
+<li>新建虚拟 Windows 10 主机。
+可以使用下面的配置</li>
+</ol>
+<pre tabindex=0><code>Machine: Q35-6.2
+BIOS: SeaBIOS // 必选
+Hyper-V: yes
+</code></pre><p>其他 I/O 设备，如网卡、硬盘尽量使用 virtio 类型连接。光驱选择 SATA 连接。</p>
+<ol start=4>
+<li>先在 VNC 作为主要显示输出的情况下安装 Windows 10，安装过程中需要依赖 virtio.iso，具体过程参考[2]。</li>
+<li>安装完 Windows 以后打开远程桌面，确保能够通过别的机器连接上，后续显卡驱动安装的步骤会通过远程连接进行。</li>
+<li>Dump 显卡 vbios，具体方法可以参考[3][4]，把文件改名为 .rom 放在 <code>/mnt/user/system/graph-bios/</code> 目录。</li>
+<li>修改虚拟机的 XML 配置，主要参考[5][6][7]。</li>
+</ol>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-xml data-lang=xml>   <span class=nt>&lt;hyperv&gt;</span>
+   	  <span class=c>&lt;!-- 省略若干行 --&gt;</span>
+      <span class=nt>&lt;vendor_id</span> <span class=na>state=</span><span class=s>&#39;on&#39;</span> <span class=na>value=</span><span class=s>&#39;AMD5700GOFDL&#39;</span><span class=nt>/&gt;</span>
+    <span class=nt>&lt;/hyperv&gt;</span>
+    <span class=nt>&lt;kvm&gt;</span>
+      <span class=nt>&lt;hidden</span> <span class=na>state=</span><span class=s>&#39;on&#39;</span><span class=nt>/&gt;</span>
+    <span class=nt>&lt;/kvm&gt;</span>
+    <span class=c>&lt;!-- 省略若干行 --&gt;</span>
+    <span class=nt>&lt;hostdev</span> <span class=na>mode=</span><span class=s>&#39;subsystem&#39;</span> <span class=na>type=</span><span class=s>&#39;pci&#39;</span> <span class=na>managed=</span><span class=s>&#39;yes&#39;</span><span class=nt>&gt;</span>
+      <span class=nt>&lt;driver</span> <span class=na>name=</span><span class=s>&#39;vfio&#39;</span><span class=nt>/&gt;</span>
+      <span class=nt>&lt;source&gt;</span>
+        <span class=nt>&lt;address</span> <span class=na>domain=</span><span class=s>&#39;0x0000&#39;</span> <span class=na>bus=</span><span class=s>&#39;0x08&#39;</span> <span class=na>slot=</span><span class=s>&#39;0x00&#39;</span> <span class=na>function=</span><span class=s>&#39;0x0&#39;</span><span class=nt>/&gt;</span> <span class=c>&lt;!-- --&gt;</span>
+      <span class=nt>&lt;/source&gt;</span>
+      <span class=nt>&lt;rom</span> <span class=na>file=</span><span class=s>&#39;/mnt/user/system/graph-bios/vbios_1638.rom&#39;</span><span class=nt>/&gt;</span> <span class=c>&lt;!-- 此处表明是显卡 --&gt;</span>
+      <span class=nt>&lt;address</span> <span class=na>type=</span><span class=s>&#39;pci&#39;</span> <span class=na>domain=</span><span class=s>&#39;0x0000&#39;</span> <span class=na>bus=</span><span class=s>&#39;0x04&#39;</span> <span class=na>slot=</span><span class=s>&#39;0x00&#39;</span> <span class=na>function=</span><span class=s>&#39;0x0&#39;</span> <span class=na>multifunction=</span><span class=s>&#39;on&#39;</span><span class=nt>/&gt;</span>
+    <span class=nt>&lt;/hostdev&gt;</span>
+    <span class=nt>&lt;hostdev</span> <span class=na>mode=</span><span class=s>&#39;subsystem&#39;</span> <span class=na>type=</span><span class=s>&#39;pci&#39;</span> <span class=na>managed=</span><span class=s>&#39;yes&#39;</span><span class=nt>&gt;</span>
+      <span class=nt>&lt;driver</span> <span class=na>name=</span><span class=s>&#39;vfio&#39;</span><span class=nt>/&gt;</span>
+      <span class=nt>&lt;source&gt;</span>
+        <span class=nt>&lt;address</span> <span class=na>domain=</span><span class=s>&#39;0x0000&#39;</span> <span class=na>bus=</span><span class=s>&#39;0x08&#39;</span> <span class=na>slot=</span><span class=s>&#39;0x00&#39;</span> <span class=na>function=</span><span class=s>&#39;0x1&#39;</span><span class=nt>/&gt;</span> <span class=c>&lt;!-- 此处 domain, bus, slot 值与显卡相同，表示是显卡上的声音输出设备 --&gt;</span>
+      <span class=nt>&lt;/source&gt;</span>
+      <span class=nt>&lt;address</span> <span class=na>type=</span><span class=s>&#39;pci&#39;</span> <span class=na>domain=</span><span class=s>&#39;0x0000&#39;</span> <span class=na>bus=</span><span class=s>&#39;0x04&#39;</span> <span class=na>slot=</span><span class=s>&#39;0x00&#39;</span> <span class=na>function=</span><span class=s>&#39;0x1&#39;</span><span class=nt>/&gt;</span> <span class=c>&lt;!-- 修改此处的 bus值与显卡对应的相同，并将 function 改为 0x1 --&gt;</span>
+    <span class=nt>&lt;/hostdev&gt;</span>
+  <span class=c>&lt;!-- 省略若干行 --&gt;</span>
+  <span class=nt>&lt;qemu:commandline&gt;</span>
+    <span class=nt>&lt;qemu:arg</span> <span class=na>value=</span><span class=s>&#39;-set&#39;</span><span class=nt>/&gt;</span>
+    <span class=nt>&lt;qemu:arg</span> <span class=na>value=</span><span class=s>&#39;device.hostdev0.x-vga=on&#39;</span><span class=nt>/&gt;</span>
+  <span class=nt>&lt;/qemu:commandline&gt;</span>
+<span class=nt>&lt;/domain&gt;</span>
+  <span class=c>&lt;!-- 如果上面的 commandline 在启动时候报关于 hostdev0 not defined 错误，用下面的配置替代
+</span><span class=c>  &lt;qemu:override&gt;
+</span><span class=c>    &lt;qemu:device alias=&#39;hostdev0&#39;&gt;
+</span><span class=c>      &lt;qemu:frontend&gt;
+</span><span class=c>        &lt;qemu:property name=&#39;x-vga&#39; type=&#39;bool&#39; value=&#39;true&#39;/&gt;
+</span><span class=c>      &lt;/qemu:frontend&gt;
+</span><span class=c>    &lt;/qemu:device&gt;
+</span><span class=c>  &lt;/qemu:override&gt;
+</span><span class=c>  --&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start=8>
+<li>启动 Windows 虚拟机，远程连接上以后安装 AMD 驱动程序，然后以管理员权限执行 <code>RadeonResetBugFixService install</code>。这个补丁必须安装，否则会出现重启或关闭虚拟机后主机 CPU 飙升的 bug。</li>
+</ol>
+<h2 id=参考>
+<a href=#%e5%8f%82%e8%80%83 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
+</a>
+参考
+</h2>
+<ol>
+<li><a href="https://www.youtube.com/watch?v=xsuRFeyqbt4">Quick and Easy PCIe Device Passthrough for VMs</a></li>
+<li>如何<a href="https://youtu.be/Tr912VpLVIk?list=PL6MCtOroZNDDIzeTPVxCqKtwdaFTF15AR&t=339">安装使用 virtio</a></li>
+<li><a href=https://forums.unraid.net/topic/112649-amd-apu-ryzen-5700g-igpu-passthrough-on-692/page/6/#comment-1134762>使用 UBU 从主板 BIOS 中抽出 vBios</a></li>
+<li><a href="https://www.youtube.com/watch?v=FWn6OCWl63o">How to Easily Dump the vBios from any GPU for Passthrough</a></li>
+<li><a href="https://www.youtube.com/watch?v=QlTVANDndpM">Advanced GPU passthrough techniques on Unraid</a></li>
+<li><a href="https://forums.unraid.net/topic/112649-amd-apu-ryzen-5700g-igpu-passthrough-on-692/?do=findComment&comment=1161884">Unraid Forum 上的讨论</a></li>
+<li><a href="https://bbs.archlinux.org/viewtopic.php?id=276409">关于 hostdev0 not defined 错误的讨论</a></li>
+</ol>
+</div>
+</div>
+<div class=container>
+<nav class="flex container suggested">
+<a rel=prev href=/posts/string-in-go/ title="Previous post (older)">
+<span>Previous</span>
+String in Go
+</a>
+</nav>
+</div>
+<div class=container>
+</div>
+</main>
+</main>
+<footer class="footer flex">
+<section class=container>
+<nav class=footer-links>
+<a href=/index.xml>RSS</a>
+</nav>
+</section>
+<script defer src=/ts/features.c81551cd4dbef120af278f16966a41142c02be9ff5d6a669be09820fbf047456.js data-enable-footnotes=true></script>
+</footer>
+</body>
+</html>
